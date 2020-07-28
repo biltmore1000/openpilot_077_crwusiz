@@ -104,30 +104,15 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
       ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.16], [0.01]]
     elif candidate in [CAR.KIA_OPTIMA, CAR.KIA_OPTIMA_H]:
-#      ret.lateralTuning.pid.kf = 0.00005
       ret.mass = 1525. + STD_CARGO_KG
       ret.wheelbase = 2.80
       ret.steerRatio = 13.75
-#      ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
-#      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.25], [0.05]]
-
-      # test
-      
-      #ret.lateralTuning.init('indi')
-      #ret.lateralTuning.indi.innerLoopGain = 3.25
-      #ret.lateralTuning.indi.outerLoopGain = 2.75
-      #ret.lateralTuning.indi.timeConstant = 2.0
-      #ret.lateralTuning.indi.actuatorEffectiveness = 1.7
-
       ret.steerActuatorDelay = 0.08
       ret.steerLimitTimer = 0.4
-      ret.steerRateCost = 0.25
-      
+      ret.steerRateCost = 0.25   
       ret.lateralTuning.init('lqr')
-
       ret.lateralTuning.lqr.scale = 2000.0
       ret.lateralTuning.lqr.ki = 0.01
-
       ret.lateralTuning.lqr.a = [0., 1., -0.22619643, 1.21822268]
       ret.lateralTuning.lqr.b = [-1.92006585e-04, 3.95603032e-05]
       ret.lateralTuning.lqr.c = [1., 0.]
@@ -228,7 +213,36 @@ class CarInterface(CarInterfaceBase):
       ret.steerRateCost = 0.4
       ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
       ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.25], [0.05]]
+  
+  
+    elif candidate == CAR.K7_HYBRID:
+      tire_stiffness_factor = 0.385
+      ret.mass = 1685. + STD_CARGO_KG
+      ret.wheelbase = 2.885
+      ret.steerRatio = 12.0
+      #ret.minSteerSpeed = 32 * CV.MPH_TO_MS
+      ret.lateralTuning.init('lqr')
+      #was 2100
+      ret.lateralTuning.lqr.scale = 2300.0
+      ret.lateralTuning.lqr.ki = 0.02
+      ret.lateralTuning.lqr.a = [0., 1., -0.22619643, 1.21822268]
+      ret.lateralTuning.lqr.b = [-1.92006585e-04, 3.95603032e-05]
+      ret.lateralTuning.lqr.c = [1., 0.]
+      ret.lateralTuning.lqr.k = [-100., 450.]
+      ret.lateralTuning.lqr.l = [0.22, 0.318]
+      ret.lateralTuning.lqr.dcGain = 0.003
+      ret.steerActuatorDelay = 0.3
+      ret.steerRateCost = 0.5
+      ret.steerLimitTimer = 0.8
+      #ret.lateralTuning.pid.kf = 0.00005
+      #ret.mass = 1675. + STD_CARGO_KG
+      #ret.wheelbase = 2.885
+      #ret.steerRatio = 12.5
+      #ret.steerRateCost = 0.4
+      #ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
+      #ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.05], [0.01]]    
 
+      
     ret.centerToFront = ret.wheelbase * 0.4
 
     # TODO: get actual value, for now starting with reasonable value for
