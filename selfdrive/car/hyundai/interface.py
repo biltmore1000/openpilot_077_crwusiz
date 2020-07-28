@@ -219,12 +219,12 @@ class CarInterface(CarInterfaceBase):
       tire_stiffness_factor = 0.385
       ret.mass = 1685. + STD_CARGO_KG
       ret.wheelbase = 2.885
-      ret.steerRatio = 12.0
+      ret.steerRatio = 13.7
       #ret.minSteerSpeed = 32 * CV.MPH_TO_MS
       ret.lateralTuning.init('lqr')
       #was 2100
-      ret.lateralTuning.lqr.scale = 2300.0
-      ret.lateralTuning.lqr.ki = 0.02
+      ret.lateralTuning.lqr.scale = 2000.0
+      ret.lateralTuning.lqr.ki = 0.01
       ret.lateralTuning.lqr.a = [0., 1., -0.22619643, 1.21822268]
       ret.lateralTuning.lqr.b = [-1.92006585e-04, 3.95603032e-05]
       ret.lateralTuning.lqr.c = [1., 0.]
